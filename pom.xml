@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.jeevox</groupId>
@@ -10,7 +11,8 @@
   <packaging>jar</packaging>
 
   <name>Excel SQL Engine</name>
-  <description>SQL-like query engine for Excel using Apache POI (POI 3.17 compatible)</description>
+  <description>SQL-like query engine for Excel files using Apache POI</description>
+  <url>https://github.com/jeevox/excel-sql-engine</url>
 
   <licenses>
     <license>
@@ -22,8 +24,16 @@
   <developers>
     <developer>
       <name>Jeevithan Ambikapathy</name>
+      <email>needforcodegvthan@gmail.com</email>
+      <url>https://github.com/jeevox</url>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/jeevox/excel-sql-engine.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:jeevox/excel-sql-engine.git</developerConnection>
+    <url>https://github.com/jeevox/excel-sql-engine</url>
+  </scm>
 
   <dependencies>
     <dependency>
@@ -31,10 +41,64 @@
       <artifactId>poi</artifactId>
       <version>3.17</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>3.17</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+
+      <!-- Source JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Javadoc JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- GPG Signing -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
 </project>
