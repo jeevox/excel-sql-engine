@@ -26,4 +26,16 @@ public class ResultSet {
     public Set<String> getFieldNames() {
         return rows.isEmpty() ? Set.of() : rows.get(0).keySet();
     }
+
+    public int getCount() {
+    return rows == null ? 0 : rows.size();
+    }
+
+    public String getField(String columnName) {
+    if (cursor < 0 || cursor >= rows.size()) {
+        throw new IllegalStateException(
+            "Cursor not positioned on a valid row. Call next() first.");
+    }
+    return rows.get(cursor).get(columnName);
+    }
 }
