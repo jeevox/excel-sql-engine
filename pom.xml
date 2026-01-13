@@ -16,6 +16,7 @@
     <description>Execute SQL-like queries directly on Excel files using Apache POI</description>
     <url>https://github.com/jeevox/excel-sql-engine</url>
 
+    <!-- ================= License ================= -->
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -24,15 +25,17 @@
         </license>
     </licenses>
 
+    <!-- ================= Developer ================= -->
     <developers>
         <developer>
             <name>Jeevithan Ambikapathy</name>
-            <email>jeevox@gmail.com</email>
+            <email>needforcodegvthan@gmail.com</email>
             <organization>GitHub</organization>
             <organizationUrl>https://github.com/jeevox</organizationUrl>
         </developer>
     </developers>
 
+    <!-- ================= SCM ================= -->
     <scm>
         <connection>scm:git:https://github.com/jeevox/excel-sql-engine.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:jeevox/excel-sql-engine.git</developerConnection>
@@ -69,24 +72,11 @@
 
     </dependencies>
 
-    <!-- ================= Distribution Management ================= -->
-    <!-- Sonatype Central (OSSRH compatibility service) -->
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://central.sonatype.com/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
     <!-- ================= Build ================= -->
     <build>
         <plugins>
 
-            <!-- Compiler -->
+            <!-- Java Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -97,7 +87,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Source JAR -->
+            <!-- Sources JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -136,13 +126,24 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Sonatype Central Publishing Plugin -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                </configuration>
             </plugin>
 
         </plugins>
