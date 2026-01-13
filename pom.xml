@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- ===== Coordinates ===== -->
+    <!-- ================= Coordinates ================= -->
     <groupId>io.github.jeevox</groupId>
     <artifactId>excel-sql-engine</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <!-- ===== Project Info (MANDATORY) ===== -->
+    <!-- ================= Project Info ================= -->
     <name>Excel SQL Engine</name>
-    <description>Execute SQL queries directly on Excel files</description>
+    <description>Execute SQL-like queries directly on Excel files using Apache POI</description>
     <url>https://github.com/jeevox/excel-sql-engine</url>
 
     <licenses>
@@ -27,7 +27,7 @@
     <developers>
         <developer>
             <name>Jeevithan Ambikapathy</name>
-            <email>needforcodegvthan@gmail.com</email>
+            <email>jeevox@gmail.com</email>
             <organization>GitHub</organization>
             <organizationUrl>https://github.com/jeevox</organizationUrl>
         </developer>
@@ -40,23 +40,37 @@
         <tag>HEAD</tag>
     </scm>
 
-    <!-- ===== Java ===== -->
+    <!-- ================= Properties ================= -->
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Lock Apache POI -->
+        <poi.version>3.17</poi.version>
     </properties>
 
-    <!-- ===== Dependencies ===== -->
+    <!-- ================= Dependencies ================= -->
     <dependencies>
+
+        <!-- Apache POI Core -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <!-- Apache POI OOXML -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>5.2.5</version>
+            <version>${poi.version}</version>
         </dependency>
+
     </dependencies>
 
-    <!-- ===== Distribution Management (NEW CENTRAL URL) ===== -->
+    <!-- ================= Distribution Management ================= -->
+    <!-- Sonatype Central (OSSRH compatibility service) -->
     <distributionManagement>
         <repository>
             <id>ossrh</id>
@@ -68,7 +82,7 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- ===== Build & Plugins ===== -->
+    <!-- ================= Build ================= -->
     <build>
         <plugins>
 
@@ -77,9 +91,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
             </plugin>
 
-            <!-- Sources JAR -->
+            <!-- Source JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -87,6 +105,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
@@ -102,6 +121,7 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
